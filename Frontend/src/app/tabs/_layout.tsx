@@ -125,6 +125,9 @@ const _layout = () => {
         <Tabs.Screen name="setting" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
         <Tabs.Screen name="about" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
         <Tabs.Screen name="password" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="GuestModal" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="Meals_record" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="export" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
 
 
 
