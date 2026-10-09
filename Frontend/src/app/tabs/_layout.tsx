@@ -128,6 +128,14 @@ const _layout = () => {
         <Tabs.Screen name="GuestModal" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
         <Tabs.Screen name="Meals_record" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
         <Tabs.Screen name="export" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="all_meals" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="MarketCost" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="MonthCost" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="Member" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="add_member" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="edit_member" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="delete_member" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="monthly_report" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
 
 
 

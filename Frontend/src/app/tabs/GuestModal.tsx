@@ -67,9 +67,7 @@ const GuestModal = ({
         <View className="rounded-t-3xl bg-white px-5 pb-8 pt-3">
           <View className="mb-5 h-1 w-9 self-center rounded-full bg-zinc-400" />
 
-          <Text className="mb-6 text-center text-lg font-semibold text-zinc-900">
-            Add Guest Meal
-          </Text>
+          <Text className="mb-6 text-center text-lg font-semibold text-zinc-900"> Add Guest Meal </Text>
 
           <View className="mb-4">
             <Text className="mb-2 text-sm font-medium text-zinc-900">Member</Text>

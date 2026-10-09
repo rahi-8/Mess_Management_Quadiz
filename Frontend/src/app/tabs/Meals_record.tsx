@@ -5,7 +5,7 @@ import { MaterialIcons, SimpleLineIcons }
 from "@expo/vector-icons";
 import { router } from 'expo-router'
 import BreakfastIcon from "../../../assets/icons/Breakfast.svg";
-import LunchtIcon from "../../../assets/icons/Lunch.svg";
+import LunchIcon from "../../../assets/icons/Lunch.svg";
 import DinnerIcon from "../../../assets/icons/Dinner.svg";
 import ExportIcon from "../../../assets/icons/export.svg";
 import { useLocalSearchParams } from "expo-router";
@@ -85,7 +85,7 @@ const MealRecord = () => {
               </View>
 
               <View className="flex-row">
-                <LunchtIcon width={18} height={18} />
+                <LunchIcon width={18} height={18} />
                 <Text className="text-[#3F3F46] pl-2"> Lunch: {Number(member.lunch)} </Text>
               </View>
 
