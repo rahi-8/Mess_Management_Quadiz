@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState, useEffect } from 'react';
 import { MaterialIcons, SimpleLineIcons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
+import { useTheme } from "../../../context/ThemeContext";
 
 const MEMBERS = [
   {
@@ -44,10 +45,9 @@ const MEMBERS = [
 
 const MarketCost = () => {
   const [date, setDate] = useState(new Date());
-
   const { members } = useLocalSearchParams();
-
   const [memberList, setMemberList] = useState<any[]>([]);
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     if (members) {
@@ -91,26 +91,27 @@ const MarketCost = () => {
   });
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50 ">
-      <ScrollView className="h-full bg-gray-50 ">
-        <View className="mb-5">
-          <Pressable className="flex-row items-center  border-x-2 border-b-2 border-gray-100 bg-white px-5 py-10" onPress={() => router.push('./Home')} >
-            <MaterialIcons name="keyboard-arrow-left" size={32} color="#3F3F46" />
-            <Text className="ml-3 flex-1 text-center text-xl font-semibold text-[#18181B]"> Market Cost </Text>
+    <SafeAreaView className={`flex-1 ${isDark ? "bg-[#18181B]" : "bg-white"}`}>
+      <ScrollView className={`flex-1 ${isDark ? "bg-black" : "bg-gray-100"}`} contentContainerStyle={{ paddingBottom: 100 }}>        
+        <View className={` ${isDark ? "bg-black" : "bg-gray-100"}`}>
+        
+          <Pressable className={`flex-row items-center  border-x-2 border-b-2  px-5 py-10 ${ isDark ? "border-[#27272A]" : "border-[#F4F4F5]" } ${ isDark ? "bg-[#18181B]" : "bg-white" }`} onPress={() => router.push('./Home')} >
+            <MaterialIcons name="keyboard-arrow-left" size={32} color={isDark ? "#D4D4D8" : "#52525B"} />
+            <Text className={`ml-3 flex-1 text-center text-xl font-semibold ${isDark ? "text-white" : "text-[#18181B]" }`}> Market Cost </Text>
           </Pressable>
         </View>
 
         {/* Daily Date */}
-        <View className="px-5 py-2">
-          <View className="flex-row items-center justify-between rounded-xl border-2 border-gray-200 bg-white px-4 py-4">
+        <View className="px-5 pt-5 pb-2">
+          <View className={`flex-row items-center justify-between rounded-xl border-2  px-4 py-5 ${ isDark ? "border-[#27272A]" : "border-[#F4F4F5]" } ${ isDark ? "bg-[#18181B]" : "bg-white" }`}>
             <Pressable onPress={() => changeDate(-1)}>
-              <SimpleLineIcons name="arrow-left" size={18} color="#3F3F46"/>
+              <SimpleLineIcons name="arrow-left" size={18} color={isDark ? "#D4D4D8" : "#52525B"}/>
             </Pressable>
 
-            <Text className="text-center font-semibold text-[#3F3F46]"> {formattedDate} </Text>
+            <Text className={`text-center font-semibold ${isDark ? "text-[#E4E4E7]" : "text-[#3F3F46]" }`}> {formattedDate} </Text>
 
             <Pressable onPress={() => changeDate(1)}>
-              <SimpleLineIcons name="arrow-right" size={18} color="#3F3F46" />
+              <SimpleLineIcons name="arrow-right" size={18} color={isDark ? "#D4D4D8" : "#52525B"} />
             </Pressable>
 
           </View>
@@ -119,24 +120,24 @@ const MarketCost = () => {
         {/* Market Cost List */}
         {memberList.length === 0 ? (
           <View className="items-center justify-center px-5 py-10 ">
-            <Text className="text-lg text-gray-500"> No market cost found </Text>
+            <Text className={`text-lg ${ isDark ? "border-[#27272A]" : "border-[#F4F4F5]" } ${ isDark ? "bg-[#18181B]" : "bg-white" }`}> No market cost found </Text>
           </View>
         ) : (
           memberList.map((member: any) => (
 
-            <View key={member.id} className="mx-5 my-2 rounded-xl border-2 border-gray-200 bg-white " >
+            <View key={member.id} className={`mx-5 my-2 rounded-xl border-2 ${ isDark ? "border-[#27272A]" : "border-[#F4F4F5]" } ${ isDark ? "bg-[#18181B]" : "bg-white" }`} >
               {/* Member */}
               <View className="p-5">
-                <Text className="text-gray-500 text-base"> {member.date || 'Unknown'} </Text>
-                <Text className="text-xl pl-1 font-semibold">{member.name || 'Unknown'}</Text>
+                <Text className={` text-base  ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}> {member.date || 'Unknown'} </Text>
+                <Text className={`text-xl pl-1 font-semibold ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}>{member.name || 'Unknown'}</Text>
               </View>
 
-              <View className="mx-5 h-[1px] bg-gray-200" />
+              <View className={`mx-5 h-[1px] ${ isDark ? "bg-[#27272A]" : "bg-[#F4F4F5]" }`} />
 
               {/* Product & Cost */}
               <View className="flex-row items-center justify-between p-5">
-                <Text className="text-xl font-semibold text-[#18181B]"> {member.product || 'Unknown'} </Text>
-                <Text className="text-xl font-semibold text-[#18181B]"> ৳{member.cost || 0} </Text>
+                <Text className={`text-xl font-semibold ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}> {member.product || 'Unknown'} </Text>
+                <Text className={`text-xl font-semibold ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}> ৳{member.cost || 0} </Text>
               </View>
 
             </View>
@@ -148,8 +149,8 @@ const MarketCost = () => {
 
       {/* Today's Total Cost */}
         <View className="mx-5 mb-10 flex-row items-center justify-between py-5 ">
-          <Text className="text-2xl font-semibold text-[#18181B]"> Today's total cost</Text>
-          <Text className="text-3xl font-bold text-[#18181B] "> ৳{TotalCost} </Text>
+          <Text className={`text-2xl font-semibold ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}> Today's total cost</Text>
+          <Text className={`text-3xl font-bold ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}> ৳{TotalCost} </Text>
 
         </View>
 

@@ -7,6 +7,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import BreakfastIcon from '../../../assets/icons/Breakfast.svg';
 import LunchIcon from '../../../assets/icons/Lunch.svg';
 import DinnerIcon from '../../../assets/icons/Dinner.svg';
+import { useTheme } from "../../../context/ThemeContext";
 
 const MEMBERS = [
   {
@@ -55,6 +56,7 @@ const AllMeals = () => {
   const [date, setDate] = useState(new Date());
   const { members } = useLocalSearchParams();
   const [memberList, setMemberList] = useState<any[]>([]);
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     console.log('Raw members param:', members);
@@ -112,37 +114,31 @@ const AllMeals = () => {
   });
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
-      <ScrollView className="h-full bg-gray-50">
-        <View className="mb-5">
-          <Pressable
-            className="flex-row items-center rounded-3xl border-x-2 border-b-2 border-gray-100 bg-white px-5 py-10"
-            onPress={() => router.push('./Home')}
-          >
-          <MaterialIcons
-            name="keyboard-arrow-left"
-            size={32}
-            color="#3F3F46"
-          />
-          <Text className="ml-3 flex-1 text-center text-xl font-semibold text-[#18181B]">
+    <SafeAreaView className={`flex-1 ${isDark ? "bg-[#18181B]" : "bg-white"}`}>
+      <ScrollView className={`flex-1 ${isDark ? "bg-black" : "bg-gray-100"}`} contentContainerStyle={{ paddingBottom: 100 }}>        
+        <View className={` ${isDark ? "bg-black" : "bg-gray-100"}`}>
+    
+          <Pressable className={`flex-row items-center border-b-2 px-5 py-10  ${ isDark ? "border-[#27272A]" : "border-[#F4F4F5]" } ${ isDark ? "bg-[#18181B]" : "bg-white" }`} onPress={() => router.push('./Home')} >
+          <MaterialIcons name="keyboard-arrow-left" size={32} color={isDark ? "#D4D4D8" : "#52525B"} />
+          <Text className={`ml-3 flex-1 text-center text-xl font-semibold ${isDark ? "text-white" : "text-[#18181B]" }`}>
             All Meals
           </Text>
         </Pressable>
       </View>
 
       {/* Daily Date */}
-      <View className="px-5 py-2">
-        <View className="flex-row items-center justify-between rounded-xl border-2 border-gray-200 bg-white px-4 py-4">
+      <View className="px-5 py-2 mt-5">
+        <View className={`flex-row items-center justify-between rounded-xl border px-4 py-5  ${ isDark ? "border-[#27272A]" : "border-[#F4F4F5]" } ${ isDark ? "bg-[#18181B]" : "bg-white" }`}>
           <Pressable onPress={() => changeDate(-1)}>
-            <SimpleLineIcons name="arrow-left" size={18} color="#3F3F46" />
+            <SimpleLineIcons name="arrow-left" size={18} color={isDark ? "#D4D4D8" : "#52525B"}/>
           </Pressable>
 
-          <Text className="text-center font-semibold text-[#3F3F46]">
+          <Text className={`text-center font-semibold ${isDark ? "text-[#E4E4E7]" : "text-[#3F3F46]" }`}>
             {formattedDate}
           </Text>
 
           <Pressable onPress={() => changeDate(1)}>
-            <SimpleLineIcons name="arrow-right" size={18} color="#3F3F46" />
+            <SimpleLineIcons name="arrow-right" size={18} color={isDark ? "#D4D4D8" : "#52525B"}/>
           </Pressable>
         </View>
       </View>
@@ -151,7 +147,7 @@ const AllMeals = () => {
       {/* Meal List */}
       {memberList.length === 0 ? (
         <View className="flex-1 items-center justify-center px-5">
-          <Text className="text-lg text-gray-500">No members found</Text>
+          <Text className={`text-lg ${ isDark ? "border-[#27272A]" : "border-[#F4F4F5]" } ${ isDark ? "bg-[#18181B]" : "bg-white" }`}>No members found</Text>
         </View>
       ) : (
         memberList.map((member: any) => {
@@ -164,38 +160,37 @@ const AllMeals = () => {
           return (
             <View
               key={member.id || Math.random().toString()}
-              className="mx-5 my-2 rounded-lg border-2 border-gray-200 bg-white"
-            >
+              className={`mx-5 my-2 rounded-lg border-2 ${ isDark ? "border-[#27272A]" : "border-[#F4F4F5]" } ${ isDark ? "bg-[#18181B]" : "bg-white" }`}>
               {/* Member */}
-              <View className="flex-row items-center justify-between px-4 py-5">
-                <Text className="text-2xl font-semibold">{member.name || 'Unknown'}</Text>
+              <View className="flex-row items-center justify-between px-5 py-5">
+                <Text className={`text-2xl  font-semibold  ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}>{member.name || 'Unknown'}</Text>
                 <View>
-                  <Text className="text-xl font-semibold text-center">{total}</Text>
-                  <Text className="font-semibold text-xs text-gray-500">Meals</Text>
+                  <Text className={`text-xl font-semibold text-center  ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`} >{total}</Text>
+                  <Text className={`font-semibold text-xs  ${isDark ? "text-[#E4E4E7]" : "text-[#3F3F46]" }`} >Meals</Text>
                 </View>
               </View>
 
-              <View className="mx-5 h-[1px] bg-gray-200" />
+              <View className={`mx-5 px-5 h-[1px] ${ isDark ? "bg-[#27272A]" : "bg-[#F4F4F5]" }`} />
 
               {/* Meal Details */}
               <View className="flex-row items-center justify-between p-5">
                 <View className="flex-row items-center">
-                  <BreakfastIcon width={18} height={18} />
-                  <Text className="pl-2 text-[#3F3F46]">
+                  <BreakfastIcon width={18} height={18} color={isDark ? "#D4D4D8" : "#52525B"}/>
+                  <Text className={`pl-2 ${isDark ? "text-[#E4E4E7]" : "text-[#3F3F46]" }`}>
                     Breakfast: {Number(member.breakfast || 0)}
                   </Text>
                 </View>
 
                 <View className="flex-row items-center">
-                  <LunchIcon width={18} height={18} />
-                  <Text className="pl-2 text-[#3F3F46]">
+                  <LunchIcon width={18} height={18} color={isDark ? "#D4D4D8" : "#52525B"}/>
+                  <Text className={`pl-2 ${isDark ? "text-[#E4E4E7]" : "text-[#3F3F46]" }`}>
                     Lunch: {Number(member.lunch || 0)}
                   </Text>
                 </View>
 
                 <View className="flex-row items-center">
-                  <DinnerIcon width={18} height={18} />
-                  <Text className="pl-2 text-[#3F3F46]">
+                  <DinnerIcon width={18} height={18}  color={isDark ? "#D4D4D8" : "#52525B"}/>
+                  <Text className={`pl-2 ${isDark ? "text-[#E4E4E7]" : "text-[#3F3F46]" }`}>
                     Dinner: {Number(member.dinner || 0)}
                   </Text>
                 </View>
@@ -209,47 +204,38 @@ const AllMeals = () => {
     </ScrollView>
 
     {memberList.length > 0 && (
-        <View className=" bg-white mt-4 mb-6  px-4">
+        <View className={`mt-4 mb-6  px-4  ${ isDark ? "border-[#27272A]" : "border-[#F4F4F5]" } ${ isDark ? "bg-[#18181B]" : "bg-white" }`}>
           {/* Meal Counts */}
           <View className="flex-row items-center justify-between mx-5 py-5">
             <View className="flex-row items-center">
-              <BreakfastIcon width={18} height={18} />
-              <Text className="pl-2 text-[#3F3F46]">
-                Breakfast:{` `}
-                <Text className="text-lg font-bold text-[#18181B]">
-                  {totals.breakfast}
-                </Text>
+              <BreakfastIcon width={18} height={18} color={isDark ? "#D4D4D8" : "#52525B"}/>
+              <Text className={`pl-2 ${isDark ? "text-[#E4E4E7]" : "text-[#3F3F46]" }`}> Breakfast:{` `}
+                <Text className={`text-lg font-bold ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}> {totals.breakfast} </Text>
               </Text>
             </View>
 
             <View className="flex-row items-center">
-              <LunchIcon width={18} height={18} />
-              <Text className="pl-2 text-[#3F3F46]">
-                Lunch:{` `}
-                <Text className="text-lg font-bold text-[#18181B]">
-                  {totals.lunch}
-                </Text>
+              <LunchIcon width={18} height={18} color={isDark ? "#D4D4D8" : "#52525B"}/>
+              <Text className={`pl-2 ${isDark ? "text-[#E4E4E7]" : "text-[#3F3F46]" }`}> Lunch:{` `}
+                <Text className={`text-lg font-bold ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}> {totals.lunch} </Text>
               </Text>
             </View>
 
             <View className="flex-row items-center">
-              <DinnerIcon width={18} height={18} />
-              <Text className="pl-2 text-[#3F3F46]">
-                Dinner:{` `}
-                <Text className="text-lg font-bold text-[#18181B]">
-                  {totals.dinner}
-                </Text>
+              <DinnerIcon width={18} height={18} color={isDark ? "#D4D4D8" : "#52525B"}/>
+              <Text className={`pl-2 ${isDark ? "text-[#E4E4E7]" : "text-[#3F3F46]" }`}> Dinner:{` `}
+                <Text className={`text-lg font-bold ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}> {totals.dinner} </Text>
               </Text>
             </View>
           </View>
 
           {/* Divider */}
-          <View className="h-[1px] bg-gray-200" />
+          <View className={`mx-5 mt-5 h-[1px] ${ isDark ? "bg-[#27272A]" : "bg-[#F4F4F5]" }`} />
 
           {/* Today's Total Meals */}
           <View className="flex-row items-center justify-between py-5 mx-4">
-            <Text className="text-2xl font-semibold text-[#18181B]"> Today's total meals </Text>
-            <Text className="text-3xl font-bold text-[#18181B]">
+            <Text className={`text-2xl font-semibold ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}> Today's total meals </Text>
+            <Text className={`text-3xl font-bold  ${isDark ? "text-[#FFFFFF]" : "text-[#18181B]" }`}>
               {grandTotal}
             </Text>
           </View>

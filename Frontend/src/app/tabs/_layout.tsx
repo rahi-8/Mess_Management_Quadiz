@@ -132,11 +132,16 @@ const _layout = () => {
         <Tabs.Screen name="MarketCost" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
         <Tabs.Screen name="MonthCost" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
         <Tabs.Screen name="Member" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
-        <Tabs.Screen name="add_member" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
-        <Tabs.Screen name="edit_member" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
-        <Tabs.Screen name="delete_member" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="AddMemberModal" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="EditMemberModal" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="DeleteMemberModal" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
         <Tabs.Screen name="monthly_report" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
-
+        <Tabs.Screen name="payment" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="utilities" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="market" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="utilities_Bill" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="AddMarketModal" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
+        <Tabs.Screen name="AddPaymentModal" options={{ href: null, tabBarStyle: { display: 'none' }, }} />
 
 
     </Tabs>
